@@ -41,5 +41,13 @@
          <hash numOwners="2"/>
       </clustering>
    </default>
+    <loaders>
+        <mongodbStore xmlns="urn:infinispan:config:mongodb:5.3" >
+            <connection host="localhost" port="27017" timeout="2000" acknowledgment="0"/>
+            <authentication username="mongo" password="mongo" />
+            <storage database="infinispan_cachestore" collection="entries" />
+        </mongodbStore>
+    </loaders>
+
    
 </infinispan>
