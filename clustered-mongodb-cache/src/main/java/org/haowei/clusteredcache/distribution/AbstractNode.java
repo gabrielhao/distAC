@@ -31,6 +31,7 @@ public abstract class AbstractNode {
                 .collection("entries");
 
         final Configuration config = b.clustering().cacheMode(CacheMode.DIST_SYNC).hash().numOwners(2).build();
+
         //MongoDBCacheStoreConfiguration store = (MongoDBCacheStoreConfiguration) config.loaders().cacheLoaders().get(0);
 
         GlobalConfiguration globalConf = GlobalConfigurationBuilder.defaultClusteredBuilder().transport()
@@ -38,8 +39,6 @@ public abstract class AbstractNode {
         EmbeddedCacheManager cacheManager = new DefaultCacheManager(globalConf);
         cacheManager.defineConfiguration("distCache", config);
         return cacheManager;
-
-
     }
 
     private static EmbeddedCacheManager createCacheManagerFromXML() throws IOException{
