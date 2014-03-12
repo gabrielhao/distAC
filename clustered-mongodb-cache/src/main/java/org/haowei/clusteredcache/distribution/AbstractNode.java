@@ -59,7 +59,7 @@ public abstract class AbstractNode {
 
     }
 
-    public static final int CLUSTER_SIZE = 2;
+    public static final int CLUSTER_SIZE = 3;
 
     private final EmbeddedCacheManager cacheManager;
 
