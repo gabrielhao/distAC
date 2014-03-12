@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/clustered-mongodb-cache/src/main/resources/infinispan-distribution.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clustered-mongodb-cache/src/main/resources/infinispan-replication.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clustered-mongodb-cache/src/main/resources/jgroups.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clustered-mongodb-cache/src/main/resources/log4j.xml" charset="UTF-8" />
+  </component>
+</project>
+
