@@ -4,6 +4,7 @@ import org.haowei.clusteredcache.util.ClusterValidation;
 import org.infinispan.configuration.cache.CacheMode;
 import org.infinispan.configuration.cache.Configuration;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
+import org.infinispan.configuration.global.GlobalConfiguration;
 import org.infinispan.configuration.global.GlobalConfigurationBuilder;
 import org.infinispan.loaders.mongodb.configuration.MongoDBCacheStoreConfiguration;
 import org.infinispan.loaders.mongodb.configuration.MongoDBCacheStoreConfigurationBuilder;
@@ -29,19 +30,23 @@ public abstract class AbstractNode {
                 .database("infinispan_cachestore")
                 .collection("entries");
 
-        final Configuration config = b.build();
-        MongoDBCacheStoreConfiguration store = (MongoDBCacheStoreConfiguration) config.loaders().cacheLoaders().get(0);
+        final Configuration config = b.clustering().cacheMode(CacheMode.DIST_SYNC).hash().numOwners(2).build();
+        //MongoDBCacheStoreConfiguration store = (MongoDBCacheStoreConfiguration) config.loaders().cacheLoaders().get(0);
 
-        return new DefaultCacheManager(GlobalConfigurationBuilder.defaultClusteredBuilder().transport()
-        .addProperty("configurationFile","jgroups.xml").build(),
-               b.clustering().cacheMode(CacheMode.DIST_SYNC).hash().numOwners(2).build());
+        GlobalConfiguration globalConf = GlobalConfigurationBuilder.defaultClusteredBuilder().transport()
+                .addProperty("configurationFile","jgroups.xml").build();
+        EmbeddedCacheManager cacheManager = new DefaultCacheManager(globalConf);
+        cacheManager.defineConfiguration("distCache", config);
+        return cacheManager;
+
+
     }
 
     private static EmbeddedCacheManager createCacheManagerFromXML() throws IOException{
         return new DefaultCacheManager("infinispan-distribution.xml");
     }
 
-    public static final int CLUSTER_SIZE = 3;
+    public static final int CLUSTER_SIZE = 2;
 
     private final EmbeddedCacheManager cacheManager;
 
