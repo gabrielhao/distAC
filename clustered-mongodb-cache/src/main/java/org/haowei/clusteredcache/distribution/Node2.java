@@ -7,10 +7,6 @@ import org.infinispan.Cache;
  * Created by hao on 3/12/14.
  */
 public class Node2 extends AbstractNode {
-    @Override
-    protected int getNodeId(){
-        return 2;
-    }
 
     public static void main(String[] args) throws Exception{
         new Node2().run();
@@ -22,6 +18,10 @@ public class Node2 extends AbstractNode {
         cache.addListener(new LoggingListener());
 
         waitForClusterToForm();
+    }
+    @Override
+    protected int getNodeId(){
+        return 2;
     }
 
 }
