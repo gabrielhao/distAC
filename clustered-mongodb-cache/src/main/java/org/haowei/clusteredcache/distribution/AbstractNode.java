@@ -28,11 +28,12 @@ public abstract class AbstractNode {
                 .username("mongo")
                 .password("mongo")
                 .database("infinispan_cachestore")
-                .collection("entries");
+                .collection("entries")
+        .clustering().cacheMode(CacheMode.DIST_SYNC).hash().numOwners(2);
 
-        final Configuration config = b.clustering().cacheMode(CacheMode.DIST_SYNC).hash().numOwners(2).build();
+        Configuration config = b.build();
 
-        //MongoDBCacheStoreConfiguration store = (MongoDBCacheStoreConfiguration) config.loaders().cacheLoaders().get(0);
+        MongoDBCacheStoreConfiguration store = (MongoDBCacheStoreConfiguration) config.loaders().cacheLoaders().get(0);
 
         GlobalConfiguration globalConf = GlobalConfigurationBuilder.defaultClusteredBuilder().transport()
                 .addProperty("configurationFile","jgroups.xml").build();
@@ -44,17 +45,36 @@ public abstract class AbstractNode {
     private static EmbeddedCacheManager createCacheManagerFromXML() throws IOException{
         return new DefaultCacheManager("infinispan-distribution.xml");
     }
+    private static EmbeddedCacheManager createCacheManagerWithoutMongo(){
+
+        GlobalConfiguration globalConf = GlobalConfigurationBuilder.defaultClusteredBuilder().transport()
+                .addProperty("configurationFile","jgroups.xml").build();
+        Configuration config = new ConfigurationBuilder().clustering()
+                .cacheMode(CacheMode.DIST_SYNC).hash().numOwners(2)
+                .build();
+
+        EmbeddedCacheManager cacheManager = new DefaultCacheManager(globalConf);
+        cacheManager.defineConfiguration("distCache", config);
+        return cacheManager;
+
+    }
 
     public static final int CLUSTER_SIZE = 2;
 
     private final EmbeddedCacheManager cacheManager;
 
     public AbstractNode(){
-        this.cacheManager = createCacheManagerProgramatically();
+       //this.cacheManager = createCacheManagerProgramatically();
+       this.cacheManager = createCacheManagerWithoutMongo();
+       /* try{
+            this.cacheManager = createCacheManagerFromXML();
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }*/
     }
 
     protected EmbeddedCacheManager getCacheManager(){
-        return cacheManager;
+        return this.cacheManager;
     }
 
     protected  void waitForClusterToForm(){
