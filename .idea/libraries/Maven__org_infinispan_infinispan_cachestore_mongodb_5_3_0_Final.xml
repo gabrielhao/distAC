@@ -1,7 +1,11 @@
 <component name="libraryTable">
   <library name="Maven: org.infinispan:infinispan-cachestore-mongodb:5.3.0.Final">
     <CLASSES>
+<<<<<<< HEAD
       <root url="jar://$MAVEN_REPOSITORY$/org/infinispan/infinispan-cachestore-mongodb/5.3.0.Final/infinispan-cachestore-mongodb-5.3.0.Final.jar!/" />
+=======
+      <root url="jar://$MAVEN_REPOSITORY$/org/infinispan/infinispan-cachestore-mongodb/5.3.0.FINAL/infinispan-cachestore-mongodb-5.3.0.Final.jar!/" />
+>>>>>>> fd3d49c05c09337784f54c8d1e3e08a4111fe71b
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/infinispan/infinispan-cachestore-mongodb/5.3.0.Final/infinispan-cachestore-mongodb-5.3.0.Final-javadoc.jar!/" />
