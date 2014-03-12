@@ -23,8 +23,8 @@
   -->
 <infinispan
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="urn:infinispan:config:6.0 http://www.infinispan.org/schemas/infinispan-config-6.0.xsd"
-        xmlns="urn:infinispan:config:6.0">
+        xsi:schemaLocation="urn:infinispan:config:5.3 http://www.infinispan.org/schemas/infinispan-config-5.3.xsd"
+        xmlns="urn:infinispan:config:5.3">
     
    <global>
       <transport>
@@ -41,13 +41,16 @@
          <hash numOwners="2"/>
       </clustering>
    </default>
-    <loaders>
-        <mongodbStore xmlns="urn:infinispan:config:mongodb:5.3" >
-            <connection host="localhost" port="27017" timeout="2000" acknowledgment="0"/>
-            <authentication username="mongo" password="mongo" />
-            <storage database="infinispan_cachestore" collection="entries" />
-        </mongodbStore>
-    </loaders>
+    <namedCache name="distCache">
+        <loaders>
+            <mongodbStore xmlns="urn:infinispan:config:mongodb:5.3" >
+                <connection host="localhost" port="27017" timeout="2000" acknowledgment="0"/>
+                <authentication username="mongo" password="mongo" />
+                <storage database="infinispan_cachestore" collection="entries" />
+            </mongodbStore>
+        </loaders>
+    </namedCache>
+
 
    
 </infinispan>
