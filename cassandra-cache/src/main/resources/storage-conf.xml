@@ -1,0 +1,9 @@
+<Keyspace Name="Infinispan">
+    <ColumnFamily CompareWith="BytesType" Name="InfinispanEntries" KeysCached="10%" />
+    <ColumnFamily CompareWith="LongType" Name="InfinispanExpiration" KeysCached="10%" ColumnType="Super" CompareSubcolumnsWith="BytesType"/>
+    <ColumnFamily CompareWith="BytesType" Name="InfinispanEntries" KeysCached="0" />
+    <ColumnFamily CompareWith="LongType" Name="InfinispanExpiration" KeysCached="0" ColumnType="Super" CompareSubcolumnsWith="BytesType"/>
+    <ReplicaPlacementStrategy>org.apache.cassandra.locator.RackUnawareStrategy</ReplicaPlacementStrategy>
+    <ReplicationFactor>2</ReplicationFactor>
+    <EndPointSnitch>org.apache.cassandra.locator.EndPointSnitch</EndPointSnitch>
+</Keyspace>

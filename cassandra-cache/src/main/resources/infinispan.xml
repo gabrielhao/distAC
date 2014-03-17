@@ -1,0 +1,20 @@
+<namedCache name="cassandraCache">
+    <loaders passivation="false" shared="true" preload="false">
+        <loader
+                class="org.infinispan.loaders.cassandra.CassandraCacheStore"
+                fetchPersistentState="true" ignoreModifications="false"
+                purgeOnStartup="false">
+            <properties>
+                <property name="host" value="localhost" />
+                <property name="keySpace" value="Infinispan" />
+                <property name="entryColumnFamily" value="InfinispanEntries" />
+                <property name="expirationColumnFamily" value="InfinispanExpiration" />
+                <property name="sharedKeyspace" value="false" />
+                <property name="readConsistencyLevel" value="ONE" />
+                <property name="writeConsistencyLevel" value="ONE" />
+                <property name="configurationPropertiesFile" value="cassandrapool.properties" />
+                <property name="keyMapper" value="org.infinispan.loaders.keymappers.DefaultTwoWayKey2StringMapper" />
+            </properties>
+        </loader>
+    </loaders>
+</namedCache>
