@@ -17,7 +17,7 @@ public class ClusterValidation {
     private static final String KEY = ClusterValidation.class.getName();
 
     public static boolean waitForClusterToForm(EmbeddedCacheManager cacheManager, int nodeId, int clusterSize){
-        return new ClusterValidation(cacheManager.getCache(), nodeId, clusterSize).chechReplicationServeralTimes()>0;
+        return new ClusterValidation(cacheManager.getCache("distCache"), nodeId, clusterSize).chechReplicationServeralTimes()>0;
     }
 
     private Log log = LogFactory.getLog(ClusterValidation.class);
