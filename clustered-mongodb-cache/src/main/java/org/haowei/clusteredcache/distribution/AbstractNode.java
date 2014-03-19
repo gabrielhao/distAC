@@ -35,7 +35,7 @@ public abstract class AbstractNode {
 
         MongoDBCacheStoreConfiguration store = (MongoDBCacheStoreConfiguration) config.loaders().cacheLoaders().get(0);
 
-        GlobalConfiguration globalConf = GlobalConfigurationBuilder.defaultClusteredBuilder().transport()
+        GlobalConfiguration globalConf = GlobalConfigurationBuilder.defaultClusteredBuilder().transport().clusterName("qa-cluster")
                 .addProperty("configurationFile","jgroups.xml").build();
         EmbeddedCacheManager cacheManager = new DefaultCacheManager(globalConf);
         cacheManager.defineConfiguration("distCache", config);
@@ -64,8 +64,8 @@ public abstract class AbstractNode {
     private final EmbeddedCacheManager cacheManager;
 
     public AbstractNode(){
-       //this.cacheManager = createCacheManagerProgramatically();
-       this.cacheManager = createCacheManagerWithoutMongo();
+       this.cacheManager = createCacheManagerProgramatically();
+       //this.cacheManager = createCacheManagerWithoutMongo();
        /* try{
             this.cacheManager = createCacheManagerFromXML();
         }catch (IOException e){
