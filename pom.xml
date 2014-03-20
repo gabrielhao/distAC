@@ -11,7 +11,7 @@
 
     <modules>
         <module>clustered-mongodb-cache</module>
-        <module>infinispan-mongodb-cachestore</module>
+        <module>cassandra-cache</module>
     </modules>
 
 

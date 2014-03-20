@@ -6,6 +6,7 @@ import org.infinispan.configuration.cache.Configuration;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.configuration.global.GlobalConfiguration;
 import org.infinispan.configuration.global.GlobalConfigurationBuilder;
+import org.infinispan.eviction.EvictionStrategy;
 import org.infinispan.loaders.mongodb.configuration.MongoDBCacheStoreConfiguration;
 import org.infinispan.loaders.mongodb.configuration.MongoDBCacheStoreConfigurationBuilder;
 import org.infinispan.manager.DefaultCacheManager;
@@ -20,7 +21,7 @@ public abstract class AbstractNode {
 
     private static EmbeddedCacheManager createCacheManagerProgramatically(){
         ConfigurationBuilder b = new ConfigurationBuilder();
-        b.loaders().addStore(MongoDBCacheStoreConfigurationBuilder.class)
+        b.eviction().maxEntries(1000).strategy(EvictionStrategy.LIRS).loaders().passivation(true).addStore(MongoDBCacheStoreConfigurationBuilder.class)
                 .host("localhost")
                 .port(27017)
                 .timeout(1500)
