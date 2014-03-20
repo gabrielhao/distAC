@@ -35,7 +35,7 @@ public abstract class AbstractNode {
 
         MongoDBCacheStoreConfiguration store = (MongoDBCacheStoreConfiguration) config.loaders().cacheLoaders().get(0);
 
-        GlobalConfiguration globalConf = GlobalConfigurationBuilder.defaultClusteredBuilder().transport().clusterName("qa-cluster")
+        GlobalConfiguration globalConf = GlobalConfigurationBuilder.defaultClusteredBuilder().transport()
                 .addProperty("configurationFile","jgroups.xml").build();
         EmbeddedCacheManager cacheManager = new DefaultCacheManager(globalConf);
         cacheManager.defineConfiguration("distCache", config);
