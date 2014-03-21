@@ -19,7 +19,7 @@ public class LoggingListener {
     @CacheEntryCreated
     public void observeAdd(CacheEntryCreatedEvent<?,?> event){
         if (!event.isPre())
-            log.infov("Cache entry with key %s added in cache %s", event.getKey(), event.getCache());
+            log.infov("Cache entry with key "+event.getKey()+" added in cache "+event.getCache());
 
     }
 

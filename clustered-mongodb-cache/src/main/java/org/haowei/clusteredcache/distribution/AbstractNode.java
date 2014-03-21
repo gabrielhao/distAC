@@ -21,7 +21,7 @@ public abstract class AbstractNode {
 
     private static EmbeddedCacheManager createCacheManagerProgramatically(){
         ConfigurationBuilder b = new ConfigurationBuilder();
-        b.eviction().maxEntries(1000).strategy(EvictionStrategy.LIRS).loaders().passivation(true).addStore(MongoDBCacheStoreConfigurationBuilder.class)
+        b.eviction().maxEntries(10).strategy(EvictionStrategy.LIRS).loaders().passivation(true).addStore(MongoDBCacheStoreConfigurationBuilder.class)
                 .host("localhost")
                 .port(27017)
                 .timeout(1500)

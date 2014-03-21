@@ -18,10 +18,19 @@ public class Node2 extends AbstractNode {
         cache.addListener(new LoggingListener());
 
         waitForClusterToForm();
+
+        putData(cache);
+
     }
     @Override
     protected int getNodeId(){
         return 2;
+    }
+
+    protected void putData(Cache<String,String> cache){
+        for (int i =0; i<100; i++){
+            cache.put(""+(i+100), "true"+i);
+        }
     }
 
 }
