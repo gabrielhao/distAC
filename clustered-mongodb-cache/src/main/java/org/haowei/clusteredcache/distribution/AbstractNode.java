@@ -21,7 +21,7 @@ public abstract class AbstractNode {
 
     private static EmbeddedCacheManager createCacheManagerProgramatically(){
         ConfigurationBuilder b = new ConfigurationBuilder();
-        b.eviction().maxEntries(10).strategy(EvictionStrategy.LIRS).loaders().passivation(true).addStore(MongoDBCacheStoreConfigurationBuilder.class)
+        b.eviction().maxEntries(100).loaders().addStore(MongoDBCacheStoreConfigurationBuilder.class)
                 .host("localhost")
                 .port(27017)
                 .timeout(1500)
@@ -30,7 +30,7 @@ public abstract class AbstractNode {
                 .password("mongo")
                 .database("infinispan_cachestore")
                 .collection("entries")
-        .clustering().cacheMode(CacheMode.DIST_SYNC).hash().numOwners(2);
+        .clustering().cacheMode(CacheMode.DIST_ASYNC).hash().numOwners(2);
 
         Configuration config = b.build();
 
@@ -51,7 +51,7 @@ public abstract class AbstractNode {
         GlobalConfiguration globalConf = GlobalConfigurationBuilder.defaultClusteredBuilder().transport()
                 .addProperty("configurationFile","jgroups.xml").build();
         Configuration config = new ConfigurationBuilder().clustering()
-                .cacheMode(CacheMode.DIST_SYNC).hash().numOwners(2)
+                .cacheMode(CacheMode.DIST_ASYNC).hash().numOwners(2)
                 .build();
 
         EmbeddedCacheManager cacheManager = new DefaultCacheManager(globalConf);

@@ -28,7 +28,7 @@ public class Node2 extends AbstractNode {
     }
 
     protected void putData(Cache<String,String> cache){
-        for (int i =0; i<100; i++){
+        for (int i =0; i<10000; i++){
             cache.put(""+(i+100), "true"+i);
         }
     }
